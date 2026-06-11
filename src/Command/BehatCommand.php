@@ -226,7 +226,14 @@ class BehatCommand extends AbstractMoodleCommand
         }
 
         if ($profile === 'chrome') {
-            return 'selenium/standalone-chrome:4';
+            // Pin Chrome to the 145.0 line: the rolling ":4" tag now resolves to Chrome 147+,
+            // which breaks the Moodle App Behat tests ("Moodle App not launched properly").
+            // Selenium itself recommends pinning a browser version rather than using a rolling
+            // tag such as "latest"/":4". See the Selenium tagging convention:
+            // https://github.com/SeleniumHQ/docker-selenium/wiki/Tagging-Convention
+            // Still overridable via the --selenium option or the MOODLE_BEHAT_SELENIUM_IMAGE env var.
+            // See https://github.com/moodlehq/moodle-plugin-ci/issues/385
+            return 'selenium/standalone-chrome:145.0';
         }
 
         if ($this->usesLegacyPhpWebdriver()) {
