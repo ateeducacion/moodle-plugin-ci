@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Check out repository code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Setup PHP 7.4
       uses: shivammathur/setup-php@v2
@@ -32,7 +32,7 @@ jobs:
 
     steps:
     - name: Check out repository code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Setup PHP 7.4
       uses: shivammathur/setup-php@v2
@@ -49,7 +49,7 @@ jobs:
       run: make coverage-phpunit
 
     - name: Upload coverage
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v7
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: ./build/logs/clover.xml
@@ -108,7 +108,7 @@ jobs:
 
     steps:
     - name: Check out repository code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Setup PHP ${{ matrix.php }}
       uses: shivammathur/setup-php@v2
@@ -168,7 +168,7 @@ jobs:
 
     steps:
     - name: Check out repository code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Setup PHP 8.1
       uses: shivammathur/setup-php@v2
@@ -182,7 +182,7 @@ jobs:
         php build/moodle-plugin-ci.phar list
 
     - name: Upload PHAR artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: moodle-plugin-ci.phar
         path: build/moodle-plugin-ci.phar
@@ -237,7 +237,7 @@ jobs:
 
     steps:
     - name: Check out repository code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Setup PHP ${{ matrix.php }}
       uses: shivammathur/setup-php@v2
@@ -260,7 +260,7 @@ jobs:
         echo "NVM_DIR=$HOME/.nvm" >> $GITHUB_ENV
 
     - name: Download PHAR artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: moodle-plugin-ci.phar
         path: build
@@ -323,7 +323,7 @@ jobs:
         coverage: none
 
     - name: Download base ${{ env.lowest_release }} PHAR artifact
-      uses: robinraju/release-downloader@v1.10
+      uses: robinraju/release-downloader@v1.13
       with:
         repository: moodlehq/moodle-plugin-ci
         tag: ${{ env.lowest_release }}
