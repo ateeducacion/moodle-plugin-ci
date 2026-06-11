@@ -98,7 +98,8 @@ jobs:
             moodle-app: 'true'
           - php: '8.1'
             moodle-branch: 'MOODLE_401_STABLE'
-            moodle-app: 'true'
+            # No Moodle App: the latest moodleappbehat plugin requires
+            # core_external\util, which only exists in Moodle 4.2 and up.
           - php: '8.0'
             moodle-branch: 'MOODLE_400_STABLE'
           - php: '8.0'
@@ -231,7 +232,8 @@ jobs:
             moodle-app: 'true'
           - php: '8.0'
             moodle-branch: 'MOODLE_401_STABLE'
-            moodle-app: 'true'
+            # No Moodle App: the latest moodleappbehat plugin requires
+            # core_external\util, which only exists in Moodle 4.2 and up.
           - php: '7.4'
             moodle-branch: 'MOODLE_400_STABLE'
 
