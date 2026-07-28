@@ -127,7 +127,7 @@ class BehatCommand extends AbstractMoodleCommand
     private function getDefaultSuite(): string
     {
         $component = $this->plugin->getComponent();
-        if (str_starts_with($component, 'theme_')) {
+        if (strpos($component, 'theme_') === 0) {
             return substr($component, \strlen('theme_'));
         }
 
