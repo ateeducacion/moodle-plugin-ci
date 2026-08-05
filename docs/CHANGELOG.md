@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 The format of this change log follows the advice given at [Keep a CHANGELOG](https://keepachangelog.com).
 
 ## [Unreleased]
+### Changed
+- ACTION SUGGESTED: bump workflows to postgres 17, which is a requirement for Moodle 5.3
+- ACTION SUGGESTED: bump workflows to mariadb 11, which is a requirement for Moodle 5.3
 
 ## [4.5.10] - 2026-02-09
 ### Changed
