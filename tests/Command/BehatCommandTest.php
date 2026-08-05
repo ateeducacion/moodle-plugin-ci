@@ -64,6 +64,31 @@ class BehatCommandTest extends MoodleTestCase
         $this->assertMatchesRegularExpression('/--verbose.*-vvv/', $this->lastCmd);
     }
 
+    public function testExecuteOnThemeDefaultsSuiteToThemeName()
+    {
+        $versionFile = $this->pluginDir . '/version.php';
+        $contents    = file_get_contents($versionFile);
+        $contents    = str_replace("'local_ci'", "'theme_foo'", $contents);
+        file_put_contents($versionFile, $contents);
+
+        $commandTester = $this->executeCommand();
+        $this->assertSame(0, $commandTester->getStatusCode());
+        $this->assertMatchesRegularExpression('/--suite=foo/', $this->lastCmd);
+        $this->assertMatchesRegularExpression('/--tags=@theme_foo/', $this->lastCmd);
+    }
+
+    public function testExecuteOnThemeWithExplicitSuiteIsNotOverridden()
+    {
+        $versionFile = $this->pluginDir . '/version.php';
+        $contents    = file_get_contents($versionFile);
+        $contents    = str_replace("'local_ci'", "'theme_foo'", $contents);
+        file_put_contents($versionFile, $contents);
+
+        $commandTester = $this->executeCommand(null, null, ['--suite' => 'default']);
+        $this->assertSame(0, $commandTester->getStatusCode());
+        $this->assertMatchesRegularExpression('/--suite=default/', $this->lastCmd);
+    }
+
     public function testExecuteWithTags()
     {
         $commandTester = $this->executeCommand(null, null, ['--tags' => '@tag1&&@tag2']);
